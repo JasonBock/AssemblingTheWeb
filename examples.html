@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>WebAssembly Demo</title>
+	</head>
+	<body>
+		<button onclick='doSomethingClick()'>Do something!</button>
+		<script>
+			function doSomethingClick() {
+				alert(wasmExports.doSomething());
+			}
+		</script>
+		<button onclick='multiplyClick()'>Multiply!</button>
+		<script>
+			function multiplyClick() {
+				alert(wasmExports.multiply(2, 21));
+			}
+		</script>
+	</body>
+	<script>
+		// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+		var wasmExports;
+		
+		fetch('examples.wasm')
+		.then(response =>
+			response.arrayBuffer())
+		.then(buffer => {
+			let codeBytes = new Uint8Array(buffer);
+			try {
+				let instance = Wasm.instantiateModule(codeBytes);
+				wasmExports = instance.exports;
+			} catch (e) {
+				alert("Error: " + e);
+			}
+		});
+	</script>
+</html>
