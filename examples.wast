@@ -1,19 +1,12 @@
 (module
-  (memory 1)
-  (export "memory" memory)
-  (export "doSomething" $_Z11doSomethingv)
-  (export "multiply" $_Z8multiplyff)
-  (func $_Z11doSomethingv (result i32)
-    (return
-      (i32.const 42)
-    )
-  )
+  (table 0 anyfunc)
+  (memory $0 1)
+  (export "memory" (memory $0))
+  (export "multiply" (func $_Z8multiplyff))
   (func $_Z8multiplyff (param $0 f32) (param $1 f32) (result f32)
-    (return
-      (f32.mul
-        (get_local $0)
-        (get_local $1)
-      )
+    (f32.mul
+      (get_local $0)
+      (get_local $1)
     )
   )
 )
