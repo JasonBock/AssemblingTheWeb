@@ -2,13 +2,14 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>WebAssembly Demo</title>
+		<title>WebAssembly Demo - Collatz</title>
 	</head>
 	<body>
-		<button onclick='multiplyClick()'>Multiply!</button>
+		<div>12, 6, 3, 10, 5, 16, 8, 4, 2, 1</div>
+		<button onclick='runCollatzClick()'>Run Collatz</button>
 		<script>
-			function multiplyClick() {
-				alert(wasmExports.multiply(20, 20));
+			function runCollatzClick() {
+				alert(wasmExports.collatz(12));
 			}
 		</script>
 	</body>
@@ -16,7 +17,7 @@
 		// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 		var wasmExports;
 		
-		fetch('examples.wasm')
+		fetch('collatz.wasm')
 			.then(response =>
 				response.arrayBuffer())
 			.then(buffer => {
