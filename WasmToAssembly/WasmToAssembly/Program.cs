@@ -14,9 +14,4 @@ namespace WasmToAssembly
 			Console.WriteLine(module().Exports.collatz(11));
 		}
 	}
-
-	public interface ICollatz
-	{
-		int collatz(int start);
-	}
 }

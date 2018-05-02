@@ -20,22 +20,13 @@
 			} 
 		};
 		var wasmExports;
-		
+
 		fetch('examplesWithCallback.wasm')
-			.then(response =>
-				response.arrayBuffer())
-			.then(buffer => {
-				let codeBytes = new Uint8Array(buffer);
-				try {
-					WebAssembly.compile(codeBytes)
-						.then(module => {
-							let instance = new WebAssembly.Instance(module, importObject);
-							wasmExports = instance.exports;
-							console.log('wasm is loaded');
-						})
-				} catch (e) {
-					alert("Error: " + e);
-				}
-			});
+			.then(response => response.arrayBuffer())
+			.then(buffer => WebAssembly.instantiate(buffer, importObject))
+			.then(results => 
+				{
+					wasmExports = results.instance.exports;
+				});		
 	</script>
 </html>

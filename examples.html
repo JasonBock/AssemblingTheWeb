@@ -8,29 +8,19 @@
 		<button onclick='multiplyClick()'>Multiply!</button>
 		<script>
 			function multiplyClick() {
-				alert(wasmExports.multiply(3, 2));
+				alert(wasmExports.multiply(12, 20));
 			}
 		</script>
 	</body>
 	<script>
-		// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 		var wasmExports;
 		
 		fetch('examples.wasm')
-			.then(response =>
-				response.arrayBuffer())
-			.then(buffer => {
-				let codeBytes = new Uint8Array(buffer);
-				try {
-					WebAssembly.compile(codeBytes)
-						.then(module => {
-							let instance = new WebAssembly.Instance(module);
-							wasmExports = instance.exports;
-							console.log('wasm is loaded');
-						})
-				} catch (e) {
-					alert("Error: " + e);
-				}
-			});
+			.then(response => response.arrayBuffer())
+			.then(buffer => WebAssembly.instantiate(buffer))
+			.then(results => 
+				{
+					wasmExports = results.instance.exports;
+				});
 	</script>
 </html>
