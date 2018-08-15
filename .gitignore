@@ -224,3 +224,4 @@ pip-log.txt
 *.wasm
 .vs/
 *.ide
+WasmToAssembly/.vs/WasmToAssembly/v15/sqlite3/storage.ide
