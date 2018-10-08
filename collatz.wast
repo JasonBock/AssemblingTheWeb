@@ -1,9 +1,5 @@
 (module
-  (table 0 anyfunc)
-  (memory $0 1)
-  (export "memory" (memory $0))
-  (export "collatz" (func $_Z7collatzi))
-  (func $_Z7collatzi (param $0 i32) (result i32)
+  (func (export "collatz") (param $0 i32) (result i32)
     (local $1 i32)
     (set_local $1
       (i32.const 0)
